@@ -1,0 +1,6 @@
+ini adalah metode lama mengguanakn data JSON 
+- Sekarangdi hadle di server yang menjalakan model nya dan mengembalikan response apakah ada kata kata kasar 
+- dan pusat uatama web dasahboard 
+
+
+Sekarang Gunakna Dari database NoSql ( MonggoDB ) yang menjadi pusat utama data yang di perluka utuk Validasi Rat

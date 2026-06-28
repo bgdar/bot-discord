@@ -2,12 +2,19 @@ from discord.ext import commands
 import discord
 
 
-class CogChattings(commands.Cog):
+class CogUser(commands.Cog):
     """chating biasa dengan bot"""
 
     def __init__(self, bot: commands.Bot):
         self.bot: commands.Bot = bot
         super().__init__()
+
+    @commands.command(name="login")
+    async def login():
+        """
+        Kirim ke user halaman dashboard untuk login ,
+        nantik samakan akun dan tambhakan id discord di webnya
+        """
 
     # --- Bot Listener start
     @commands.Cog.listener(name="on_member_join")
@@ -15,7 +22,14 @@ class CogChattings(commands.Cog):
         """sapa Member Join"""
         chanel = member.guild.system_channel()
         if chanel:
-            await member.send(f"Welcome to the server {member.mention}")
+            await member.send(f"Hey {member.name} \n Welcome to the server {member.mention}")
+
+    @commands.Cog.listener(name="on_member_join")
+    async def on_member_remove(self, member: discord.Member):
+        """sapa Member Join"""
+        chanel = member.guild.system_channel()
+        if chanel:
+            await member.send(f" By By {member.name}")
 
     # ada  yang default nya
     # @commands.command(name="help")

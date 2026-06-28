@@ -5,11 +5,14 @@ import discord
 from discord.ext import commands
 
 # cogs
-from cors.cogChattings import CogChattings
+from cors.cogChattings import CogUser
 from cors.cogRant import CogRant
 
+from service import helpInfo
+
 # data
-from data.dataRant import DataRant
+# Bgdar : gak pakek lagi , sekarang mengguanak service App terpisah
+# from dataJson.dataRant import DataRant
 
 load_dotenv()
 
@@ -19,7 +22,7 @@ intents.message_content = True
 
 # prefix commadn di awali dengan '!'
 bot = commands.Bot(command_prefix="!", intents=intents)
-# help_command=None )  # commadn default
+# help_command=None )  # commadn default biarkan aktive
 
 # other config
 
@@ -30,7 +33,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 #     await ctx.send("Help command")
 
 
-dataRant = DataRant()
+# dataRant = DataRant()
 
 
 @bot.event
@@ -39,15 +42,21 @@ async def on_ready():
     await bot.change_presence(activity=discord.Game(name="!help"))
 
 
-@bot.command(name="info")
+@bot.command(name="info",)
 async def info(ctx: commands.Context):
-    await ctx.send("Rant Bot ")
-    await ctx.send("Jaga sopan santunya ya")
+    helpInfo(ctx)
+# akan di awali dengan "/"
+
+
+@bot.slash_command(name="info", description="Infomasi tentang rant Bot")
+async def info(ctx: commands.Context):
+    helpInfo(ctx)
 
 
 # cog atau kelompok Mesage Bot
-bot.add_cog(CogChattings(bot))
-bot.add_cog(CogRant(bot=bot, dataRant=dataRant))
+bot.add_cog(CogUser(bot))
+# bot.add_cog(CogRant(bot=bot, dataRant=dataRant))
+bot.add_cog(CogRant(bot=bot))
 
 
 if __name__ == "__main__":
